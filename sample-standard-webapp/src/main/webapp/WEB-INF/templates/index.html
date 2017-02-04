@@ -38,6 +38,19 @@
 	<!-- ./wrapper -->
 	<script type="text/javascript" th:inline="javascript">
 		var base = /*[[${#httpServletRequest.getContextPath()}]]*/"";
+		var activeMenu = function(code) {
+			Pace.restart();
+
+			var $sidebarMenu = $(".sidebar-menu");
+			$sidebarMenu.find("li").removeClass("active");
+
+			var menu = $sidebarMenu.find(".menu_" + code);
+			var parentCode = menu.data("parent-code");
+			if (parentCode) {
+				$sidebarMenu.find(".menu_" + parentCode).addClass("active");
+			}
+			menu.addClass("active");
+		};
 	</script>
 	<script type="text/javascript" src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
 	<script th:data-main="@{/assets/main.js}" type="text/javascript"

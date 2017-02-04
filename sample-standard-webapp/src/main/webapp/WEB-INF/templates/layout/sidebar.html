@@ -20,6 +20,9 @@
 			<!-- sidebar menu: : style can be found in sidebar.less -->
 			<ul class="sidebar-menu">
 				<li class="header">菜单</li>
+				<li class="menu_dashboard">
+					<a href="#/page/dashboard"><i class="fa fa-dashboard"></i> <span>首页</span></a>
+				</li>
 				<li th:class="${menuRoot.leaf}?'':'treeview'" th:classappend="'menu_'+${menuRoot.code}"
 					th:each="menuRoot : ${menuRoots}">
 					<a th:href="${menuRoot.href==null}?'javascript:;':('#/page'+${menuRoot.href})"> <i
@@ -28,7 +31,8 @@
 					</span>
 					</a>
 					<ul class="treeview-menu" th:if="${!menuRoot.leaf}">
-						<li th:classappend="'menu_'+${child.code}" th:each="child : ${menuRoot.children}">
+						<li th:classappend="'menu_'+${child.code}" th:data-parent-code="${menuRoot.code}"
+							th:each="child : ${menuRoot.children}">
 							<a th:href="'#/page'+${child.href}" th:inline="text"><i th:class="${child.iconCls}"></i> [[${child.name}]]</a>
 						</li>
 					</ul>

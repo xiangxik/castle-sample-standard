@@ -2,9 +2,7 @@
 <script type="text/javascript">
 	requirejs([ "domReady", "jquery" ], function(ready, $) {
 		ready(function() {
-			Pace.restart();
-			$(".sidebar-menu").find("li").removeClass("active");
-			$(".sidebar-menu").find(".menu_" + code).addClass("active");
+			activeMenu("system_admin");
 		});
 	});
 </script>
