@@ -1,7 +1,7 @@
 requirejs.config({
 	paths : {
-		text : "//cdn.bootcss.com/require-text/2.0.12/text.min",
 		domReady : "//cdn.bootcss.com/require-domReady/2.0.1/domReady.min",
+		director : "//cdn.bootcss.com/Director/1.2.8/director.min",
 		jquery : "//cdn.bootcss.com/jquery/2.2.4/jquery.min",
 		bootstrap : "//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min",
 		slimscroll : "//cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.min",
@@ -13,7 +13,8 @@ requirejs.config({
 	},
 	map : {
 		"*" : {
-			"css" : "//cdn.bootcss.com/require-css/0.1.8/css.min.js"
+			"css" : "//cdn.bootcss.com/require-css/0.1.8/css.min.js",
+			"text" : "//cdn.bootcss.com/require-text/2.0.12/text.min.js"
 		}
 	},
 	shim : {
@@ -29,8 +30,26 @@ requirejs.config({
 	}
 });
 
-requirejs([ "domReady", "jquery", "app" ], function(ready, $, app) {
+requirejs([ "domReady", "director", "jquery", "app" ], function(ready, director, $, app) {
 	ready(function() {
+		var contentWrapper = $(".content-wrapper");
+		var routes = {
+			"/page" : {
+				"?((\w|.)*)" : function(path) {
+					require([ "text!" + base + "/" + path + "?_t=" + (new Date()).getTime() ], function(html) {
+						contentWrapper.html(html);
+					});
+				}
+			}
+		};
+		var router = Router(routes);
+		router.init();
 
+		var hash = window.location.hash;
+		if (hash && hash != "") {
+
+		} else {
+			window.location.href = "#/page/dashboard";
+		}
 	});
 });

@@ -22,6 +22,11 @@ public class IndexController {
 		return "/login";
 	}
 
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public String dashboardPage() {
+		return "/dashboard";
+	}
+
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String dashboardPage(@AuthenticationPrincipal CurrentUserDetails currentUserDetails, Model model) {
 		model.addAttribute("currentUser", currentUserDetails == null ? null : currentUserDetails.getCustomUser());
