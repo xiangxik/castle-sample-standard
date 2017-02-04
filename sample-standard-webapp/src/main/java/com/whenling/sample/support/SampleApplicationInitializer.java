@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 
 import com.whenling.castle.integration.ApplicationInitializer;
 import com.whenling.sample.entity.AdminEntity;
+import com.whenling.sample.entity.MenuItemEntity;
 import com.whenling.sample.repo.AdminRepository;
+import com.whenling.sample.repo.MenuItemRepository;
 
 @Component
 public class SampleApplicationInitializer extends ApplicationInitializer {
@@ -17,6 +19,9 @@ public class SampleApplicationInitializer extends ApplicationInitializer {
 	@Autowired
 	private AdminRepository adminRepository;
 
+	@Autowired
+	private MenuItemRepository menuItemRepository;
+
 	@Override
 	public void onRootContextRefreshed() {
 		if (adminRepository.count() == 0) {
@@ -26,6 +31,32 @@ public class SampleApplicationInitializer extends ApplicationInitializer {
 			admin.setPassword(passwordEncoder.encode("asd123"));
 			adminRepository.save(admin);
 		}
+
+		if (menuItemRepository.count() == 0) {
+			int sortNo = 0;
+
+			MenuItemEntity menuUser = createMenu("用户管理", "user", "fa fa-users", null, null, sortNo++, null);
+			createMenu("会员列表", "user_list", "fa fa-address-book", "/user", null, sortNo++, menuUser);
+
+			MenuItemEntity menuSystem = createMenu("系统管理", "system", "fa fa-desktop", null, null, sortNo++, null);
+			createMenu("系统设置", "system_setting", "fa fa-cog", "/setting", null, sortNo++, menuSystem);
+			createMenu("管理员", "system_admin", "fa fa-user-circle", "/admin", null, sortNo++, menuSystem);
+			createMenu("管理组", "system_admin_group", "fa fa-sitemap", "/admingroup", null, sortNo++, menuSystem);
+
+		}
+	}
+
+	private MenuItemEntity createMenu(String name, String code, String iconCls, String href, String parameters, Integer sortNo,
+			MenuItemEntity parent) {
+		MenuItemEntity item = new MenuItemEntity();
+		item.setName(name);
+		item.setCode(code);
+		item.setIconCls(iconCls);
+		item.setHref(href);
+		item.setParameters(parameters);
+		item.setSortNo(sortNo);
+		item.setParent(parent);
+		return menuItemRepository.save(item);
 	}
 
 }

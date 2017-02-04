@@ -9,8 +9,7 @@ requirejs.config({
 		icheck : "//cdn.bootcss.com/iCheck/1.0.2/icheck.min",
 		validator : "//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min",
 
-		app : base + "/assets/adminlte/js/app.min",
-		demo : base + "/assets/adminlte/js/demo"
+		app : base + "/assets/adminlte/js/app.min"
 	},
 	map : {
 		"*" : {
@@ -30,7 +29,7 @@ requirejs.config({
 	}
 });
 
-requirejs([ "domReady", "jquery", "demo" ], function(ready, $, demo) {
+requirejs([ "domReady", "jquery", "app" ], function(ready, $, app) {
 	ready(function() {
 
 	});

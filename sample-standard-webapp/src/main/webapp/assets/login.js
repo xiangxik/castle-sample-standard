@@ -39,7 +39,7 @@ requirejs([ "domReady", "jquery", "icheck", "validator" ], function(ready, $, de
 			$.post($form.attr('action'), $form.serialize(), function(result) {
 				if (result.success) {
 					$(".login-box-msg").nextAll(".alert").remove();
-					location.href = base + "/center";
+					location.href = base + "/index";
 				} else {
 					$(".login-box-msg").nextAll(".alert").remove();
 					$(".login-box-msg").after("\
