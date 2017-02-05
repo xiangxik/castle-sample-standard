@@ -4,6 +4,7 @@ requirejs.config({
 		director : "//cdn.bootcss.com/Director/1.2.8/director.min",
 		jquery : "//cdn.bootcss.com/jquery/2.2.4/jquery.min",
 		bootstrap : "//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min",
+		dialog : "//cdn.bootcss.com/jquery-confirm/3.0.3/jquery-confirm.min",
 		slimscroll : "//cdn.bootcss.com/jQuery-slimScroll/1.3.8/jquery.slimscroll.min",
 		fastclick : "//cdn.bootcss.com/fastclick/1.0.6/fastclick.min",
 		icheck : "//cdn.bootcss.com/iCheck/1.0.2/icheck.min",
@@ -26,12 +27,12 @@ requirejs.config({
 			deps : [ "jquery" ],
 			exports : "bootstrap"
 		},
+		dialog : [ "bootstrap", "css!//cdn.bootcss.com/jquery-confirm/3.0.3/jquery-confirm.min.css" ],
 		icheck : [ "bootstrap", "css!//cdn.bootcss.com/iCheck/1.0.2/skins/square/blue.css" ],
 		validator : [ "bootstrap", "css!//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" ],
 		bootgrid_base : [ "bootstrap", "css!" + base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid.min.css" ],
 		bootgrid : [ "bootgrid_base" ],
-		app : [ "jquery", "bootstrap", "slimscroll", "fastclick" ],
-		demo : [ "app" ]
+		app : [ "jquery", "bootstrap", "dialog", "slimscroll", "fastclick" ]
 	}
 });
 

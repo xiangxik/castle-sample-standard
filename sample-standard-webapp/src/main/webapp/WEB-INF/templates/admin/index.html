@@ -20,9 +20,8 @@
 
 		<div class="mailbox-controls">
 			<div class="btn-group btn-group-sm">
-				<button type="button" class="btn btn-primary" id="add-button" data-user="1">
-					<i class="fa fa-plus"></i> 添加
-				</button>
+				<a class="btn btn-primary" href="#/page/admin/add"> <i class="fa fa-plus"></i> 添加
+				</a>
 				<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
 					type="button">
 					批量 <span class="ion-arrow-down-b"></span>
@@ -82,19 +81,95 @@
 
 
 	<script type="text/javascript">
-		requirejs([ "domReady", "jquery", "bootgrid" ], function(ready, $) {
-			ready(function() {
-				activeMenu("system_admin");
+		requirejs(
+				[ "domReady", "jquery", "bootgrid" ],
+				function(ready, $) {
+					ready(function() {
+						activeMenu("system_admin");
 
-				var gridAdmin = $("#grid-admin").bootgrid({
-					url : base + "/admin/page"
-				});
+						var deleteRow = function(grid, ids) {
+							$.confirm({
+								title : "确认信息",
+								content : "确定要删除吗？",
+								buttons : {
+									confirm : {
+										text : "确定",
+										action : function() {
+											$.post(base + "/admin/delete", {
+												ids : ids
+											}, function(resp) {
+												if (resp.success) {
+													$.alert({
+														title : "提示",
+														content : "操作成功",
+														buttons : {
+															ok : {
+																text : "确定"
+															}
+														}
+													});
+													grid.bootgrid("reload")
+												} else {
+													$.alert({
+														title : "提示",
+														content : resp.msg,
+														buttons : {
+															ok : {
+																text : "确定"
+															}
+														}
+													});
+												}
+											}, "json");
+										}
+									},
+									cancel : {
+										text : "取消"
+									}
+								}
+							});
+						};
 
-				$("#open-search-button").on("click", function() {
-					$("#search-panel").toggle('fast')
+						var gridAdmin = $("#grid-admin")
+								.bootgrid(
+										{
+											url : base + "/admin/page",
+											formatters : {
+												"commands" : function(column, row) {
+													return "\
+			<div class=\"btn-group btn-group-sm\" data-row-id=\""+row.id+"\">\
+				<a type=\"button\" class=\"btn btn-primary\" href=\"#/page/admin/edit/"+row.id+"\">\
+					<i class=\"glyphicon glyphicon-edit\"></i>\
+				</a>\
+				<a aria-expanded=\"false\" aria-haspopup=\"true\" data-toggle=\"dropdown\" \
+					class=\"btn btn-primary dropdown-toggle\" type=\"button\">\
+					<i class=\"fa fa-cog\"></i>\
+					<span class=\"ion-arrow-down-b\"></span>\
+				</a>\
+				<ul class=\"dropdown-menu pull-right\">\
+					<li><a href=\"javascript:;\" class=\"command-password\"><i class=\"glyphicon glyphicon-lock\"></i> 修改密码</a></li>\
+					<li><a href=\"javascript:;\" class=\"command-delete\"><i class=\"glyphicon glyphicon-remove\"></i> 移除</a></li>\
+				</ul>\
+			</div>";
+												}
+											}
+										});
+
+						gridAdmin.on("loaded.rs.jquery.bootgrid", function() {
+							var $table = $(this);
+							$table.find(".dropdown-toggle").dropdown();
+
+							$table.find(".command-delete").on("click", function(e) {
+								var entity_id = $(this).closest(".btn-group").data("row-id");
+								deleteRow($table, [ entity_id ]);
+							});
+						});
+
+						$("#open-search-button").on("click", function() {
+							$("#search-panel").toggle('fast')
+						});
+					});
 				});
-			});
-		});
 	</script>
 </body>
 </html>
