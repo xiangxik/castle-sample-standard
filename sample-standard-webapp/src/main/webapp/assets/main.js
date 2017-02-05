@@ -38,11 +38,13 @@ requirejs.config({
 requirejs([ "domReady", "director", "jquery", "app" ], function(ready, director, $, app) {
 	ready(function() {
 		var contentWrapper = $(".content-wrapper");
+		var $body = $("body");
 		var routes = {
 			"/page" : {
 				"?((\w|.)*)" : function(path) {
 					require([ "text!" + base + "/" + path + "?_t=" + (new Date()).getTime() ], function(html) {
 						contentWrapper.html(html);
+						$body.removeClass('sidebar-open');
 					});
 				}
 			}
