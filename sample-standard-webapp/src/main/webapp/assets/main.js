@@ -9,6 +9,9 @@ requirejs.config({
 		icheck : "//cdn.bootcss.com/iCheck/1.0.2/icheck.min",
 		validator : "//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min",
 
+		bootgrid_base : base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid",
+		bootgrid : base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid.fa.min",
+
 		app : base + "/assets/adminlte/js/app.min"
 	},
 	map : {
@@ -25,6 +28,8 @@ requirejs.config({
 		},
 		icheck : [ "bootstrap", "css!//cdn.bootcss.com/iCheck/1.0.2/skins/square/blue.css" ],
 		validator : [ "bootstrap", "css!//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" ],
+		bootgrid_base : [ "bootstrap", "css!" + base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid.min.css" ],
+		bootgrid : [ "bootgrid_base" ],
 		app : [ "jquery", "bootstrap", "slimscroll", "fastclick" ],
 		demo : [ "app" ]
 	}
