@@ -3,6 +3,9 @@ package com.whenling.sample.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.whenling.castle.repo.jpa.DataEntity;
@@ -19,6 +22,10 @@ public class UserEntity extends DataEntity<AdminEntity, Long> {
 
 	private Date lastLoginDate;
 	private String lastLoginIp;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "department_id")
+	private DepartmentEntity department;
 
 	public String getUsername() {
 		return username;
@@ -58,6 +65,14 @@ public class UserEntity extends DataEntity<AdminEntity, Long> {
 
 	public void setLastLoginIp(String lastLoginIp) {
 		this.lastLoginIp = lastLoginIp;
+	}
+
+	public DepartmentEntity getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(DepartmentEntity department) {
+		this.department = department;
 	}
 
 }

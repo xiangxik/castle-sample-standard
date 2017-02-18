@@ -1,14 +1,14 @@
 requirejs.config({
 	paths : {
-		domReady : "//cdn.bootcss.com/require-domReady/2.0.1/domReady.min",
-		jquery : "//cdn.bootcss.com/jquery/2.2.4/jquery.min",
-		bootstrap : "//cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min",
-		icheck : "//cdn.bootcss.com/iCheck/1.0.2/icheck.min",
-		validator : "//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min"
+		domReady : "http://cdn.staticfile.org/require-domReady/2.0.1/domReady.min",
+		jquery : "http://lib.sinaapp.com/js/jquery/2.2.4/jquery-2.2.4.min",
+		bootstrap : "http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min",
+		icheck : "http://cdn.staticfile.org/iCheck/1.0.2/icheck.min",
+		validator : "http://cdn.staticfile.org/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min"
 	},
 	map : {
 		"*" : {
-			"css" : "//cdn.bootcss.com/require-css/0.1.8/css.min.js"
+			"css" : "http://cdn.staticfile.org/require-css/0.1.8/css.min.js"
 		}
 	},
 	shim : {
@@ -17,8 +17,8 @@ requirejs.config({
 			deps : [ "jquery" ],
 			exports : "bootstrap"
 		},
-		icheck : [ "bootstrap", "css!//cdn.bootcss.com/iCheck/1.0.2/skins/square/blue.css" ],
-		validator : [ "bootstrap", "css!//cdn.bootcss.com/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" ]
+		icheck : [ "bootstrap", "css!http://cdn.staticfile.org/iCheck/1.0.2/skins/square/blue.css" ],
+		validator : [ "bootstrap", "css!http://cdn.staticfile.org/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" ]
 	}
 });
 
