@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.whenling.castle.repo.jpa.DataEntity;
 
@@ -16,8 +17,12 @@ public class UserEntity extends DataEntity<AdminEntity, Long> {
 
 	private static final long serialVersionUID = -7165317453689472732L;
 
+	@NotNull
 	private String username;
+
 	private String password;
+
+	@NotNull
 	private String name;
 
 	private Date lastLoginDate;

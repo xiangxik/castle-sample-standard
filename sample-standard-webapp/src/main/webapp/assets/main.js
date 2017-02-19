@@ -12,6 +12,15 @@ requirejs.config({
 		bootgrid_base : base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid",
 		bootgrid : base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid.fa.min",
 
+		treeview : "http://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min",
+
+		fancytree : "http://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.21.0/jquery.fancytree-all.min",
+
+		ztree : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.core.min",
+		ztree_check : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.excheck.min",
+		ztree_edit : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.exedit.min",
+		ztree_hide : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.exhide.min",
+
 		app : base + "/assets/adminlte/js/app.min"
 	},
 	map : {
@@ -26,6 +35,11 @@ requirejs.config({
 		validator : [ "bootstrap", "css!http://cdn.staticfile.org/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" ],
 		bootgrid_base : [ "bootstrap", "css!" + base + "/assets/adminlte/vendor/jquery.bootgrid/jquery.bootgrid.min.css" ],
 		bootgrid : [ "bootgrid_base" ],
+		treeview : [ "bootstrap", "css!http://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" ],
+		fancytree : [ "bootstrap", "css!http://cdnjs.cloudflare.com/ajax/libs/jquery.fancytree/2.21.0/skin-win8/ui.fancytree.min.css" ],
+		ztree_check : [ "ztree" ],
+		ztree_edit : [ "ztree" ],
+		ztree_hide : [ "ztree" ],
 		app : [ "bootstrap", "dialog", "slimscroll", "fastclick" ]
 	}
 });

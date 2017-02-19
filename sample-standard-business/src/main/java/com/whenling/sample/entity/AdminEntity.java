@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.whenling.castle.repo.jpa.DataEntity;
 
@@ -13,8 +14,12 @@ public class AdminEntity extends DataEntity<AdminEntity, Long> {
 
 	private static final long serialVersionUID = -3613817204223653639L;
 
+	@NotNull
 	private String username;
+
 	private String password;
+
+	@NotNull
 	private String name;
 
 	private Date lastLoginDate;

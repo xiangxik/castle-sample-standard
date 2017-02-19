@@ -2,6 +2,7 @@ package com.whenling.sample.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.whenling.castle.repo.jpa.HierarchicalEntity;
 
@@ -11,8 +12,12 @@ public class MenuItemEntity extends HierarchicalEntity<AdminEntity, Long, MenuIt
 
 	private static final long serialVersionUID = -4506364204676824312L;
 
+	@NotNull
 	private String name;
+	
+	@NotNull
 	private String code;
+	
 	private String iconCls;
 	private String href;
 	private String parameters;

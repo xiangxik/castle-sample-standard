@@ -36,7 +36,7 @@ public class SampleApplicationInitializer extends ApplicationInitializer {
 			int sortNo = 0;
 
 			MenuItemEntity menuUser = createMenu("用户管理", "user", "fa fa-users", null, null, sortNo++, null);
-			createMenu("会员列表", "user_list", "fa fa-address-book", "/user", null, sortNo++, menuUser);
+			createMenu("用户列表", "user_list", "fa fa-address-book", "/user", null, sortNo++, menuUser);
 
 			MenuItemEntity menuSystem = createMenu("系统管理", "system", "fa fa-desktop", null, null, sortNo++, null);
 			createMenu("系统设置", "system_setting", "fa fa-cog", "/setting", null, sortNo++, menuSystem);
