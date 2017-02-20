@@ -20,13 +20,17 @@
 
 		<div class="row">
 			<div class="col-md-3">
-				<div class="box box-solid">
+				<div class="mailbox-controls">
+					<div class="btn-group btn-group-sm">
+						<button id="department-add-button" type="button" class="btn btn-primary">添加部门</button>
+						<button type="button" class="btn btn-danger disabled" id="department-delete-button">删除部门</button>
+					</div>
+				</div>
+				<div class="box box-primary">
 					<div class="box-header with-border">
 						<h3 class="box-title">部门</h3>
 
 						<div class="box-tools">
-							<button type="button" id="department-add-button" class="btn btn-box-tool" data-toggle="tooltip"
-								data-original-title="添加部门">添加</button>
 							<button type="button" class="btn btn-box-tool" data-widget="collapse">
 								<i class="fa fa-minus"></i>
 							</button>
@@ -45,7 +49,7 @@
 						</a>
 						<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
 							type="button">
-							批量 <span class="ion-arrow-down-b"></span>
+							批量 <span class="fa fa-caret-down"></span>
 						</button>
 						<ul class="dropdown-menu">
 							<li>
@@ -112,10 +116,10 @@
 					ready(function() {
 						activeMenu("user_list");
 
-						$("#department-add-button").on("click", function() {
+						var addDepartment = function(parent) {
 							$.confirm({
 								title : "添加部门",
-								content : "url:" + base + "/department/add",
+								content : "url:" + base + "/department/add?parent=" + (parent ? parent : ''),
 								type : "blue",
 								typeAnimated : true,
 								onContentReady : function() {
@@ -128,6 +132,7 @@
 										var bv = $form.data('bootstrapValidator');
 										$.post($form.attr('action'), $form.serialize(), function(result) {
 											if (result.success) {
+												refreshDepartmentTree();
 												self.close();
 											} else {
 												self.buttons.ok.enable();
@@ -149,16 +154,38 @@
 									}
 								}
 							});
-						});
+						}
 
-						$.post(base + "/department/tree", {}, function(resp) {
-							$('#department_treeview').treeview({
-								color : "#428bca",
-								showBorder : false,
-								showIcon : false,
-								data : resp
+						var departmentAddButton = $("#department-add-button");
+						var departmentDeleteButton = $("#department-delete-button");
+						var refreshDepartmentTree = function() {
+							$.post(base + "/department/tree", {}, function(resp) {
+								var departmentTreeView = $('#department_treeview').treeview({
+									color : "#428bca",
+									showBorder : false,
+									showIcon : false,
+									data : resp,
+									onNodeSelected : function(event, data) {
+										departmentAddButton.text(" 添加子部门 ");
+										departmentDeleteButton.removeClass("disabled");
+									},
+									onNodeUnselected : function(event, data) {
+										departmentAddButton.text(" 添加部门 ");
+										departmentDeleteButton.addClass("disabled");
+									}
+								});
+
+								departmentAddButton.off("click").on("click", function() {
+									if (departmentTreeView.treeview('getSelected') && departmentTreeView.treeview('getSelected')[0]) {
+										addDepartment(departmentTreeView.treeview('getSelected')[0].id);
+									} else {
+										addDepartment();
+									}
+								});
 							});
-						});
+						};
+
+						refreshDepartmentTree();
 
 						var deleteRow = function(grid, ids) {
 							$.confirm({

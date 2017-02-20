@@ -50,8 +50,10 @@ public class DepartmentController {
 	}
 
 	@RequestMapping(value = { "/add", "/edit" }, method = RequestMethod.GET)
-	public String add(Model model) {
-		return edit(new DepartmentEntity(), model);
+	public String add(@RequestParam(name = "parent", required = false) DepartmentEntity parent, Model model) {
+		DepartmentEntity department = new DepartmentEntity();
+		department.setParent(parent);
+		return edit(department, model);
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
