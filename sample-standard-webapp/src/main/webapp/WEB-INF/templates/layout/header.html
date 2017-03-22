@@ -5,8 +5,9 @@
 
 	<header th:fragment="main" class="main-header">
 		<!-- Logo -->
-		<a th:href="@{/index}" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"><b>后台</b>管理</span>
-			<!-- logo for regular state and mobile devices --> <span class="logo-lg"><b>后台</b>管理系统</span>
+		<a th:href="@{/index}" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> <span class="logo-mini"
+			th:text="#{app.name_short}"></span> <!-- logo for regular state and mobile devices --> <span class="logo-lg"
+			th:text="#{app.name}"></span>
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
 		<nav class="navbar navbar-static-top">
