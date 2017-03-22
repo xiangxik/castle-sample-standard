@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.querydsl.core.types.Predicate;
 import com.whenling.castle.repo.domain.Result;
@@ -92,10 +93,22 @@ public class AdminController {
 			return Result.validateError();
 		}
 
+		AdminEntity otherAdmin = adminRepository.findByUsername(admin.getUsername());
 		if (admin.isNew()) {
-			if (Strings.isNullOrEmpty(newPassword)) {
+			if (otherAdmin != null) {
+				return Result.validateError().message("该账号已存在");
+			}
+		} else {
+			if (!Objects.equal(otherAdmin.getId(), admin.getId())) {
+				return Result.validateError().message("该账号已存在");
+			}
+		}
+
+		if (Strings.isNullOrEmpty(newPassword)) {
+			if (admin.isNew()) {
 				return Result.validateError().message("密码不能为空");
 			}
+		} else {
 			admin.setPassword(passwordEncoder.encode(newPassword));
 		}
 
