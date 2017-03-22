@@ -3,6 +3,8 @@ package com.whenling.sample.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,6 +29,12 @@ public class DepartmentController {
 
 	@Autowired
 	private DepartmentRepository departmentRepository;
+
+	@RequestMapping(value = { "", "/", "/index" }, method = RequestMethod.GET)
+	public String show(Model model) {
+		model.addAttribute("departments", departmentRepository.findAll(new Sort(new Order("treePath"), new Order("sortNo"))));
+		return "/department/index";
+	}
 
 	@RequestMapping(value = "/tree", method = RequestMethod.POST)
 	@ResponseBody

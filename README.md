@@ -6,3 +6,5 @@ http://craftpip.github.io/jquery-confirm/
 https://github.com/jonmiles/bootstrap-treeview
 
 http://www.treejs.cn/v3/demo.php
+
+http://maxazan.github.io/jquery-treegrid/

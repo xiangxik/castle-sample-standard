@@ -21,7 +21,11 @@ requirejs.config({
 		ztree_edit : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.exedit.min",
 		ztree_hide : "http://cdnjs.cloudflare.com/ajax/libs/zTree.v3/3.5.28/js/jquery.ztree.exhide.min",
 
-		app : base + "/assets/adminlte/js/app.min"
+		treegrid_base : "https://cdnjs.cloudflare.com/ajax/libs/jquery-treegrid/0.2.0/js/jquery.treegrid.min",
+		treegrid : "https://cdnjs.cloudflare.com/ajax/libs/jquery-treegrid/0.2.0/js/jquery.treegrid.bootstrap3.min",
+
+		app : base + "/assets/adminlte/js/app.min",
+		utils : base + "/assets/adminlte/js/utils"
 	},
 	map : {
 		"*" : {
@@ -40,7 +44,9 @@ requirejs.config({
 		ztree_check : [ "ztree" ],
 		ztree_edit : [ "ztree" ],
 		ztree_hide : [ "ztree" ],
-		app : [ "bootstrap", "dialog", "slimscroll", "fastclick" ]
+		treegrid_base : [ "bootstrap", "css!http://cdnjs.cloudflare.com/ajax/libs/jquery-treegrid/0.2.0/css/jquery.treegrid.min.css" ],
+		treegrid : [ "treegrid_base" ],
+		app : [ "bootstrap", "dialog", "slimscroll", "fastclick", "utils" ]
 	}
 });
 

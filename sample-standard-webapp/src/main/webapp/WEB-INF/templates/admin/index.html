@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="box box-success" id="search-panel">
-			<form class="form-search form-inline">
+			<form id="search-form" class="form-search form-inline">
 				<div class="box-body">
 					<div class="form-group">
 						<label for="search-username" class="control-label">账号</label> <input class="form-control" id="search-username"
@@ -134,6 +134,10 @@
 								.bootgrid(
 										{
 											url : base + "/admin/page",
+											post : function() {
+												var keyValues = $("#search-form").serialize();
+												return parseQueryString(keyValues);
+											},
 											formatters : {
 												"commands" : function(column, row) {
 													return "\
@@ -163,6 +167,18 @@
 								var entity_id = $(this).closest(".btn-group").data("row-id");
 								deleteRow($table, [ entity_id ]);
 							});
+						});
+
+						var refreshGrid = function() {
+							gridAdmin.bootgrid("reload");
+						}
+
+						$("#search-button").on("click", function() {
+							refreshGrid();
+							return false;
+						});
+						$("#refresh-button").on("click", function() {
+							refreshGrid();
 						});
 
 						$("#open-search-button").on("click", function() {

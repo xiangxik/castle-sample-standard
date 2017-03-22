@@ -10,7 +10,7 @@
 				<a th:href="@{/dashboard}"><i class="fa fa-dashboard"></i> 首页</a>
 			</li>
 			<li>
-				<a href="javascript:;">用户管理</a>
+				<a href="javascript:;">系统管理</a>
 			</li>
 			<li class="active">用户列表</li>
 		</ol>
@@ -18,92 +18,63 @@
 
 	<section class="content">
 
-		<div class="row">
-			<div class="col-md-3">
-				<div class="mailbox-controls">
-					<div class="btn-group btn-group-sm">
-						<button id="department-add-button" type="button" class="btn btn-primary">添加部门</button>
-						<button type="button" class="btn btn-danger disabled" id="department-delete-button">删除部门</button>
-					</div>
-				</div>
-				<div class="box box-primary">
-					<div class="box-header with-border">
-						<h3 class="box-title">部门</h3>
-
-						<div class="box-tools">
-							<button type="button" class="btn btn-box-tool" data-widget="collapse">
-								<i class="fa fa-minus"></i>
-							</button>
-						</div>
-					</div>
-					<div id="department_treeview" class="box-body no-padding treeview"></div>
-					<!-- /.box-body -->
-				</div>
-				<!-- /. box -->
-			</div>
-			<!-- /.col -->
-			<div class="col-md-9">
-				<div class="mailbox-controls">
-					<div class="btn-group btn-group-sm">
-						<a class="btn btn-primary" href="#/page/user/add"> <i class="fa fa-plus"></i> 添加
+		<div class="mailbox-controls">
+			<div class="btn-group btn-group-sm">
+				<a class="btn btn-primary" href="#/page/user/add"> <i class="fa fa-plus"></i> 添加
+				</a>
+				<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
+					type="button">
+					批量 <span class="fa fa-caret-down"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:;" id="delete-button"> <i class="glyphicon glyphicon-remove"></i> 删除
 						</a>
-						<button aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" class="btn btn-primary dropdown-toggle"
-							type="button">
-							批量 <span class="fa fa-caret-down"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li>
-								<a href="javascript:;" id="delete-button"> <i class="glyphicon glyphicon-remove"></i> 删除
-								</a>
-							</li>
-						</ul>
-					</div>
-					<div class="btn-group btn-group-sm">
-						<button id="open-search-button" type="button" class="btn btn-primary">
-							<i class="fa fa-search"></i>
-						</button>
-						<button type="button" class="btn btn-warning" id="refresh-button">
-							<i class="fa fa-refresh"></i>
-						</button>
-					</div>
-				</div>
-
-				<div class="box box-success" id="search-panel">
-					<form class="form-search form-inline">
-						<div class="box-body">
-							<div class="form-group">
-								<label for="search-username" class="control-label">账号</label> <input class="form-control" id="search-username"
-									placeholder="请输入账号" name="username" type="text">
-							</div>
-							<div class="form-group">
-								<label for="search-name" class="control-label">姓名</label> <input class="form-control" id="search-name"
-									placeholder="请输入姓名" name="name" type="text">
-							</div>
-							<button type="submit" class="btn btn-primary btn-sm" id="search-button">
-								<i class="fa fa-search"></i> 搜索
-							</button>
-						</div>
-					</form>
-				</div>
-
-				<div class="box box-primary">
-					<div class="box-body no-padding">
-						<table id="grid-user" class="table table-hover">
-							<thead>
-								<tr>
-									<th data-column-id="id" data-type="string" data-identifier="true" data-visible="false">ID</th>
-									<th data-column-id="username">账号</th>
-									<th data-column-id="name">姓名</th>
-									<th data-formatter="commands" data-css-class="command-column" data-width="120px" data-sortable="false"
-										data-align="center" data-header-align="center">操作</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
-
+					</li>
+				</ul>
 			</div>
-			<!-- /.col -->
+			<div class="btn-group btn-group-sm">
+				<button id="open-search-button" type="button" class="btn btn-primary">
+					<i class="fa fa-search"></i>
+				</button>
+				<button type="button" class="btn btn-warning" id="refresh-button">
+					<i class="fa fa-refresh"></i>
+				</button>
+			</div>
+		</div>
+
+		<div class="box box-success" id="search-panel">
+			<form id="search-form" class="form-search form-inline">
+				<div class="box-body">
+					<div class="form-group">
+						<label for="search-username" class="control-label">账号</label> <input class="form-control" id="search-username"
+							placeholder="请输入账号" name="username" type="text">
+					</div>
+					<div class="form-group">
+						<label for="search-name" class="control-label">姓名</label> <input class="form-control" id="search-name"
+							placeholder="请输入姓名" name="name" type="text">
+					</div>
+					<button type="submit" class="btn btn-primary btn-sm" id="search-button">
+						<i class="fa fa-search"></i> 搜索
+					</button>
+				</div>
+			</form>
+		</div>
+
+		<div class="box box-primary">
+			<div class="box-body no-padding">
+				<table id="grid-user" class="table table-hover">
+					<thead>
+						<tr>
+							<th data-column-id="id" data-type="string" data-identifier="true" data-visible="false">ID</th>
+							<th data-column-id="username">账号</th>
+							<th data-column-id="name">姓名</th>
+							<th data-formatter="commands" data-css-class="command-column" data-width="120px" data-sortable="false"
+								data-align="center" data-header-align="center">操作</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
 		</div>
 
 	</section>
@@ -111,81 +82,10 @@
 
 	<script type="text/javascript">
 		requirejs(
-				[ "domReady", "bootgrid", "treeview" ],
+				[ "domReady", "bootgrid" ],
 				function(ready) {
 					ready(function() {
-						activeMenu("user_list");
-
-						var addDepartment = function(parent) {
-							$.confirm({
-								title : "添加部门",
-								content : "url:" + base + "/department/add?parent=" + (parent ? parent : ''),
-								type : "blue",
-								typeAnimated : true,
-								onContentReady : function() {
-									var self = this;
-									self.$content.find("form").bootstrapValidator().on('success.form.bv', function(e) {
-										e.preventDefault();
-
-										self.buttons.ok.disable();
-										var $form = $(e.target);
-										var bv = $form.data('bootstrapValidator');
-										$.post($form.attr('action'), $form.serialize(), function(result) {
-											if (result.success) {
-												refreshDepartmentTree();
-												self.close();
-											} else {
-												self.buttons.ok.enable();
-											}
-										}, "json");
-									});
-								},
-								columnClass : 'large',
-								buttons : {
-									ok : {
-										text : '确定',
-										action : function() {
-											this.$content.find("form").submit();
-											return false;
-										}
-									},
-									close : {
-										text : '关闭'
-									}
-								}
-							});
-						}
-
-						var departmentAddButton = $("#department-add-button");
-						var departmentDeleteButton = $("#department-delete-button");
-						var refreshDepartmentTree = function() {
-							$.post(base + "/department/tree", {}, function(resp) {
-								var departmentTreeView = $('#department_treeview').treeview({
-									color : "#428bca",
-									showBorder : false,
-									showIcon : false,
-									data : resp,
-									onNodeSelected : function(event, data) {
-										departmentAddButton.text(" 添加子部门 ");
-										departmentDeleteButton.removeClass("disabled");
-									},
-									onNodeUnselected : function(event, data) {
-										departmentAddButton.text(" 添加部门 ");
-										departmentDeleteButton.addClass("disabled");
-									}
-								});
-
-								departmentAddButton.off("click").on("click", function() {
-									if (departmentTreeView.treeview('getSelected') && departmentTreeView.treeview('getSelected')[0]) {
-										addDepartment(departmentTreeView.treeview('getSelected')[0].id);
-									} else {
-										addDepartment();
-									}
-								});
-							});
-						};
-
-						refreshDepartmentTree();
+						activeMenu("system_user");
 
 						var deleteRow = function(grid, ids) {
 							$.confirm({
@@ -230,10 +130,14 @@
 							});
 						};
 
-						var gridAdmin = $("#grid-user")
+						var gridUser = $("#grid-user")
 								.bootgrid(
 										{
 											url : base + "/user/page",
+											post : function() {
+												var keyValues = $("#search-form").serialize();
+												return parseQueryString(keyValues);
+											},
 											formatters : {
 												"commands" : function(column, row) {
 													return "\
@@ -255,7 +159,7 @@
 											}
 										});
 
-						gridAdmin.on("loaded.rs.jquery.bootgrid", function() {
+						gridUser.on("loaded.rs.jquery.bootgrid", function() {
 							var $table = $(this);
 							$table.find(".dropdown-toggle").dropdown();
 
@@ -263,6 +167,18 @@
 								var entity_id = $(this).closest(".btn-group").data("row-id");
 								deleteRow($table, [ entity_id ]);
 							});
+						});
+
+						var refreshGrid = function() {
+							gridUser.bootgrid("reload");
+						}
+
+						$("#search-button").on("click", function() {
+							refreshGrid();
+							return false;
+						});
+						$("#refresh-button").on("click", function() {
+							refreshGrid();
 						});
 
 						$("#open-search-button").on("click", function() {

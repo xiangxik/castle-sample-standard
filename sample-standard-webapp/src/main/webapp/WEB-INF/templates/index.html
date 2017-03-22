@@ -49,19 +49,6 @@
 				location.href = base + "/login";
 			}
 		});
-		var activeMenu = function(code) {
-			Pace.restart();
-
-			var $sidebarMenu = $(".sidebar-menu");
-			$sidebarMenu.find("li").removeClass("active");
-
-			var menu = $sidebarMenu.find(".menu_" + code);
-			var parentCode = menu.data("parent-code");
-			if (parentCode) {
-				$sidebarMenu.find(".menu_" + parentCode).addClass("active");
-			}
-			menu.addClass("active");
-		};
 	</script>
 	<script th:data-main="@{/assets/main.js}" type="text/javascript"
 		src="https://cdn.staticfile.org/require.js/2.3.2/require.min.js"></script>
